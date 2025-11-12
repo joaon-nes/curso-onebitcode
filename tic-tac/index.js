@@ -59,7 +59,7 @@ function handleBoardClick(ev){ //função para clicar no tabuleiro
         vBoard[row][collumn] = 'O'
     }
     console.clear()
-    console.table(vBoard) // mostrar informação como tabela
+    console.table(vBoard) // mostrar a informação como tabela
     disableRegion(span)
     const winRegions = getWinRegions()
     if (winRegions.length > 0) {
@@ -68,6 +68,8 @@ function handleBoardClick(ev){ //função para clicar no tabuleiro
     })
         document.querySelector('h2').innerHTML = `${document.getElementById(turnPlayer).value} venceu!`
         boardRegions.forEach(disableRegion)
+    } else if (vBoard.flat().every(cell => cell !== '')) { // verificação de empate
+        document.querySelector('h2').innerHTML = 'Empate!'
     } else {
         turnPlayer = turnPlayer === 'player1' ? 'player2' : 'player1'
         updateTitle()

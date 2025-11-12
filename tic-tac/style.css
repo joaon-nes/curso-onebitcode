@@ -1,25 +1,114 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    font-family: sans-serif;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+  text-align: center;
+  padding: 30px 20px;
+
+  caret-color: transparent;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+hr {
+  margin: 20px auto;
+  width: 60%;
+  border: none;
+  border-top: 2px solid #ccc;
+}
+
+label {
+  font-size: 1.2em;
+  margin: 10px;
+  display: inline-block;
+}
+
+input[type="text"] {
+  width: 240px;
+  padding: 12px;
+  font-size: 1em;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  caret-color: transparent;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus {
+  border-color: #0077cc;
+  box-shadow: 0 0 5px rgba(0, 119, 204, 0.3);
+}
+
+button#start {
+  padding: 12px 24px;
+  font-size: 1em;
+  background-color: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 20px;
+  transition: background-color 0.3s;
+}
+
+button#start:hover {
+  background-color: #005fa3;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+#turnPlayer {
+  font-weight: bold;
+  color: #0077cc;
 }
 
 #gameBoard {
-    background-color: #232323;
-    display: grid;
-    grid-template-columns: 6rem 6rem 6rem;
-    grid-template-rows: 6rem 6rem 6rem;
-    gap: .5rem;
-    margin-bottom: 1.5rem;
-    max-width: 19rem;
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 5px;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 #gameBoard span {
-    background-color: #ddd;
-    cursor: pointer;
-    display: grid;
-    place-content: center;
-    font-size: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5em;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  user-select: none;
+  caret-color: transparent;
+  outline: none;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
-#gameBoard span.win {
-    background-color: #25a340
+#gameBoard span:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+#gameBoard span:focus {
+  outline: none;
+}
+
+.win {
+  background-color: #a0e7a0 !important;
+  border-color: #4caf50 !important;
 }
