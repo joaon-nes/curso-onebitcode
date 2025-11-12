@@ -9,7 +9,7 @@ function updateTitle() {
 
 function initializeGame() {
     vBoard = [['', '', ''], ['', '', ''], ['', '', '']]
-    turnPlayer = 'player1'
+    turnPlayer = Math.random() < 0.5 ? 'player1' : 'player2' // sorteia quem inicia
     document.querySelector('h2').innerHTML = 'Vez de: <span id="turnPlayer"></span>'
     updateTitle()
     boardRegions.forEach(function (element){
