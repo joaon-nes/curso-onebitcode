@@ -8,6 +8,14 @@ function updateTitle() {
 }
 
 function initializeGame() {
+    const player1Name = document.getElementById('player1').value.trim()
+    const player2Name = document.getElementById('player2').value.trim()
+
+    if (!player1Name || !player2Name) {
+        alert('Necessário dois jogadores.')
+        return
+    }
+
     vBoard = [['', '', ''], ['', '', ''], ['', '', '']]
     turnPlayer = Math.random() < 0.5 ? 'player1' : 'player2' // sorteia quem inicia
     document.querySelector('h2').innerHTML = 'Vez de: <span id="turnPlayer"></span>'
