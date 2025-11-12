@@ -20,6 +20,7 @@ function initializeGame() {
     turnPlayer = Math.random() < 0.5 ? 'player1' : 'player2' // sorteia quem inicia
     document.querySelector('h2').innerHTML = 'Vez de: <span id="turnPlayer"></span>'
     updateTitle()
+    document.getElementById('gameBoard').classList.add('active')
     boardRegions.forEach(function (element){
         element.classList.remove('win') // limpar tabuleiro
         element.innerText = ''
@@ -76,8 +77,10 @@ function handleBoardClick(ev){ //função para clicar no tabuleiro
     })
         document.querySelector('h2').innerHTML = `${document.getElementById(turnPlayer).value} venceu!`
         boardRegions.forEach(disableRegion)
+        document.getElementById('gameBoard').classList.remove('active')
     } else if (vBoard.flat().every(cell => cell !== '')) { // verificação de empate
         document.querySelector('h2').innerHTML = 'Empate!'
+        document.getElementById('gameBoard').classList.remove('active')
     } else {
         turnPlayer = turnPlayer === 'player1' ? 'player2' : 'player1'
         updateTitle()
