@@ -75,11 +75,16 @@ function handleBoardClick(ev){ //função para clicar no tabuleiro
     winRegions.forEach(function(region) {
         document.querySelector(`[data-region="${region}"]`).classList.add('win')
     })
-        document.querySelector('h2').innerHTML = `${document.getElementById(turnPlayer).value} venceu!`
+        // document.querySelector('h2').innerHTML = `${document.getElementById(turnPlayer).value} venceu!`
+
+        const winnerName = document.getElementById(turnPlayer).value
+        document.querySelector('h2').innerHTML = `${winnerName} venceu!`
+        updateWinStats(turnPlayer)
         boardRegions.forEach(disableRegion)
         document.getElementById('gameBoard').classList.remove('active')
     } else if (vBoard.flat().every(cell => cell !== '')) { // verificação de empate
         document.querySelector('h2').innerHTML = 'Empate!'
+        updateDrawStats()
         document.getElementById('gameBoard').classList.remove('active')
     } else {
         turnPlayer = turnPlayer === 'player1' ? 'player2' : 'player1'
@@ -88,3 +93,87 @@ function handleBoardClick(ev){ //função para clicar no tabuleiro
 }
 
 document.getElementById('start').addEventListener('click', initializeGame)
+
+function getStats() {
+    const defaultStats = {
+        wins: {
+            'Jogador um': 0,
+            'Jogador dois': 0
+        },
+        draws: 0
+    }
+    const savedStatsString = localStorage.getItem('ticTacStats')
+    if (!savedStatsString) {
+        return defaultStats
+    }
+    const savedStats = JSON.parse(savedStatsString)
+    const mergedStats = {
+        ...defaultStats,
+        ...savedStats,
+        wins: {
+            ...defaultStats.wins,
+            ...(savedStats.wins || {})
+        }
+    }
+    return mergedStats
+}
+function displayStats() {
+    const stats = getStats()
+    const statsList = document.getElementById('statsList')
+    statsList.innerHTML = '' // limpar lista atual
+
+    for (const playerName in stats.wins) {
+        const count = stats.wins[playerName]
+        const li = document.createElement('li')
+        
+        let text = ''
+        if (count === 0) {
+            text = '0'
+        } else if (count === 1) {
+            text = '1 vitória'
+        } else {
+            text = `${count} vitórias`
+        }
+        
+        li.innerText = `${playerName}: ${text}`
+        statsList.appendChild(li)
+    }
+    const drawCount = stats.draws
+    const liDraw = document.createElement('li')
+
+    let drawText = ''
+    if (drawCount === 0) {
+        drawText = '0'
+    } else if (drawCount === 1) {
+        drawText = '1 empate'
+    } else {
+        drawText = `${drawCount} empates`
+    }
+
+    liDraw.innerText = `Empates: ${drawText}`
+    statsList.appendChild(liDraw)
+}
+
+function updateWinStats(playerIdentifier) {
+    const stats = getStats()
+    
+    let statsName = ''
+    if (playerIdentifier === 'player1') {
+        statsName = 'Jogador um'
+    } else {
+        statsName = 'Jogador dois'
+    }
+    stats.wins[statsName] = (stats.wins[statsName] || 0) + 1
+    
+    localStorage.setItem('ticTacStats', JSON.stringify(stats))
+    displayStats() // atualizar a exibição
+}
+
+function updateDrawStats() {
+    const stats = getStats()
+    stats.draws = (stats.draws || 0) + 1
+    localStorage.setItem('ticTacStats', JSON.stringify(stats))
+    displayStats()
+}
+
+displayStats()

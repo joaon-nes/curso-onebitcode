@@ -28,7 +28,7 @@ hr {
 
 label {
   font-size: 1.2em;
-  margin: 10px;
+  margin: 0;
   display: inline-block;
 }
 
@@ -36,7 +36,7 @@ input[type="text"] {
   width: 240px;
   padding: 12px;
   font-size: 1em;
-  margin: 10px;
+  margin: 0;
   border: 1px solid #ccc;
   border-radius: 6px;
   background-color: #fff;
@@ -81,7 +81,7 @@ h2 {
   grid-template-columns: repeat(3, 100px);
   grid-template-rows: repeat(3, 100px);
   justify-content: center;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 
 #gameBoard span {
@@ -110,4 +110,56 @@ h2 {
 .win {
   background-color: #a0e7a0 !important;
   border-color: #4caf50 !important;
+}
+
+.game-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 50px;
+  margin-top: 20px;
+}
+
+#statsBoard {
+  border: 1px solid #ccc;
+  /* border-radius: 6px; */
+  padding: 15px 25px;
+  min-width: 220px;
+  text-align: left;
+}
+
+#statsBoard h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+#statsBoard ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#statsBoard li {
+  font-size: 1.1em;
+  margin-bottom: 8px;
+}
+
+.players-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin: 25px auto;
+}
+
+.player-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.player-input label {
+    font-size: 1.5em;
+    font-weight: bold;
 }
